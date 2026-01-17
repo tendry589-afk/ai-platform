@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Platform - Plateforme IA Complète</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%); }
+        .card-gradient { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+        .neon-glow { box-shadow: 0 0 30px rgba(124, 58, 237, 0.3); }
+        .float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .typing-effect { overflow: hidden; border-right: 2px solid #7c3aed; white-space: nowrap; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #7c3aed; } }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body class="bg-slate-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">🤖</span>
+                    <span class="text-xl font-bold gradient-text">AI Platform</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-slate-300 hover:text-white transition">Fonctionnalités</a>
+                    <a href="#modules" class="text-slate-300 hover:text-white transition">Modules IA</a>
+                    <a href="#tech" class="text-slate-300 hover:text-white transition">Technologies</a>
+                    <a href="#pricing" class="text-slate-300 hover:text-white transition">Prix</a>
+                    <button onclick="showModal('login')" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition">Connexion</button>
+                    <button onclick="showModal('register')" class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 py-2 rounded-lg transition">Commencer</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,...')] opacity-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-sm text-white mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                        Version 1.0 disponible
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                        Créez des applications IA
+                        <span class="gradient-text">sans abonnement</span>
+                    </h1>
+                    <p class="text-xl text-slate-300 mb-8">
+                        Plateforme complète et modulaire avec Chatbot NLP, Recommandations, Prédictions et Vision par Ordinateur. 
+                        Entièrement open-source et gratuite.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="showModal('register')" class="bg-white text-slate-900 px-8 py-4 rounded-xl font-semibold hover:bg-slate-100 transition shadow-lg">
+                            🚀 Commencer Gratuitement
+                        </button>
+                        <button onclick="scrollToSection('demo')" class="glass text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition">
+                            ▶️ Voir la Démo
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-8 mt-8 text-slate-400">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-2">⭐</span>
+                            <span>5 Modules IA</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-2">🔓</span>
+                            <span>100% Gratuit</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-2">☁️</span>
+                            <span>Autohébergé</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="float">
+                        <div class="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 border border-slate-700 neon-glow">
+                            <!-- Chat Demo -->
+                            <div class="space-y-4" id="chatDemo">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">🤖</div>
+                                    <div class="bg-slate-700 rounded-2xl rounded-tl-none px-4 py-2 max-w-xs">
+                                        <p class="text-slate-200">Bonjour ! Je suis votre assistant IA. Comment puis-je vous aider ?</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 flex-row-reverse">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">👤</div>
+                                    <div class="bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl rounded-tr-none px-4 py-2 max-w-xs">
+                                        <p class="text-white">Explique-moi le machine learning</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">🤖</div>
+                                    <div class="bg-slate-700 rounded-2xl rounded-tl-none px-4 py-2 max-w-md">
+                                        <p class="text-slate-200 typing-effect">Le machine learning est une branche de l'IA qui permet aux systèmes d'apprendre...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating Elements -->
+                    <div class="absolute -top-4 -right-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl p-3 shadow-lg float" style="animation-delay: 1s;">
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl p-3 shadow-lg float" style="animation-delay: 2s;">
+                        <span class="text-2xl">🔮</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white mb-2">4</div>
+                    <div class="text-slate-400">Modules IA</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white mb-2">∞</div>
+                    <div class="text-slate-400">Utilisateurs</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white mb-2">100%</div>
+                    <div class="text-slate-400">Gratuit</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-white mb-2">Open</div>
+                    <div class="text-slate-400">Source</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Fonctionnalités <span class="gradient-text">Principales</span></h2>
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    Une suite complète d'outils IA prêts pour la production
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-gradient rounded-2xl p-6 text-white hover:neon-glow transition cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <span class="text-2xl">💬</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Chatbot NLP</h3>
+                    <p class="text-slate-400">Conversations intelligentes avec compréhension du langage naturel, contexte et mémoire.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card-gradient rounded-2xl p-6 text-white hover:neon-glow transition cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <span class="text-2xl">⭐</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Recommandations</h3>
+                    <p class="text-slate-400">Système de recommandation personnalisé basé sur le filtrage collaboratif et le contenu.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card-gradient rounded-2xl p-6 text-white hover:neon-glow transition cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <span class="text-2xl">🔮</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Analyse Prédictive</h3>
+                    <p class="text-slate-400">Prédictions basées sur le machine learning classique avec modèles entraînables.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="card-gradient rounded-2xl p-6 text-white hover:neon-glow transition cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <span class="text-2xl">👁️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Vision par Ordinateur</h3>
+                    <p class="text-slate-400">Classification d'images et détection d'objets avec modèles CNN.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="card-gradient rounded-2xl p-6 text-white hover:neon-glow transition cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Sécurité Enterprise</h3>
+                    <p class="text-slate-400">Authentification JWT, chiffrement des données et audit logs complets.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="card-gradient rounded-2xl p-6 text-white hover:neon-glow transition cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Déploiement Facile</h3>
+                    <p class="text-slate-400">Docker, Kubernetes et CI/CD prêts à l'emploi pour un déploiement rapide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Detail Section -->
+    <section id="modules" class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Modules <span class="gradient-text">IA Détaillés</span></h2>
+            </div>
+
+            <!-- Module 1: Chatbot -->
+            <div class="mb-20 bg-slate-800/50 rounded-3xl p-8 border border-slate-700">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-flex items-center px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm mb-4">Module NLP</span>
+                        <h3 class="text-3xl font-bold text-white mb-4">Chatbot Conversationnel</h3>
+                        <p class="text-slate-400 mb-6">Un chatbot intelligent capable de comprendre le langage naturel, maintenir le contexte des conversations et apprendre des interactions.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Modèles pré-entraînés (BERT, GPT-2)
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Recherche sémantique (RAG)
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Classification d'intentions
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Analyse de sentiments
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900 rounded-2xl p-6 font-mono text-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <pre class="text-green-400"><code>
+POST /api/v1/chatbot/chat
+{
+  "content": "Bonjour !",
+  "conversation_id": "uuid",
+  "model_version": "gpt2-base"
+}
+
+Response:
+{
+  "response": "Bonjour ! 
+  Comment puis-je 
+  vous aider ?",
+  "intent": {...},
+  "processing_time_ms": 150
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 2: Recommendations -->
+            <div class="mb-20 bg-slate-800/50 rounded-3xl p-8 border border-slate-700">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1 bg-slate-900 rounded-2xl p-6 font-mono text-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <pre class="text-purple-400"><code>
+GET /api/v1/recommendations/
+{
+  "user_id": "uuid",
+  "algorithm": "hybrid",
+  "limit": 10
+}
+
+Response:
+[{
+  "item_id": "123",
+  "score": 0.95,
+  "confidence": 0.92,
+  "algorithm": "hybrid"
+}]
+                        </code></pre>
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <span class="inline-flex items-center px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm mb-4">Module ML</span>
+                        <h3 class="text-3xl font-bold text-white mb-4">Système de Recommandations</h3>
+                        <p class="text-slate-400 mb-6">Des suggestions personnalisées basées sur le comportement utilisateur, l'historique et les préférences.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Filtrage collaboratif
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Filtrage basé contenu
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Approche hybride
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Apprentissage continu
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 3: Predictions -->
+            <div class="mb-20 bg-slate-800/50 rounded-3xl p-8 border border-slate-700">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-flex items-center px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm mb-4">Module ML Classique</span>
+                        <h3 class="text-3xl font-bold text-white mb-4">Analyse Prédictive</h3>
+                        <p class="text-slate-400 mb-6">Des modèles de machine learning entraînés sur vos données pour des prédictions précises.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Régression (prédiction de valeurs)
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Classification (catégories)
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                XGBoost & Random Forest
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Feature importance
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900 rounded-2xl p-6 font-mono text-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <pre class="text-green-400"><code>
+POST /api/v1/predictions/
+{
+  "model_name": "xgboost",
+  "input_data": {
+    "feature1": 10,
+    "feature2": 20,
+    "feature3": 30
+  }
+}
+
+Response:
+{
+  "prediction": 85.5,
+  "confidence": 0.92,
+  "feature_importance": {...}
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 4: Computer Vision -->
+            <div class="bg-slate-800/50 rounded-3xl p-8 border border-slate-700">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1 bg-slate-900 rounded-2xl p-6 font-mono text-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <pre class="text-orange-400"><code>
+POST /api/v1/images/classify
+Content-Type: multipart/form-data
+
+Response:
+{
+  "classifications": [{
+    "label": "cat",
+    "confidence": 0.95
+  }, {
+    "label": "animal", 
+    "confidence": 0.92
+  }],
+  "processing_time_ms": 300
+}
+                        </code></pre>
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <span class="inline-flex items-center px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm mb-4">Module CV</span>
+                        <h3 class="text-3xl font-bold text-white mb-4">Vision par Ordinateur</h3>
+                        <p class="text-slate-400 mb-6">Classification d'images et détection d'objets avec des modèles CNN puissants.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                ResNet & EfficientNet
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                YOLO pour détection
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Segmentation sémantique
+                            </li>
+                            <li class="flex items-center text-slate-300">
+                                <span class="text-green-400 mr-2">✓</span>
+                                Transfer learning
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Stack <span class="gradient-text">Technologique</span></h2>
+                <p class="text-xl text-slate-400">Des technologies modernes et éprouvées</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Frontend -->
+                <div class="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl p-6 border border-cyan-500/30">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">🎨 Frontend</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li>React 18 + TypeScript</li>
+                        <li>Redux Toolkit</li>
+                        <li>TailwindCSS</li>
+                        <li>Vite</li>
+                        <li>React Query</li>
+                    </ul>
+                </div>
+
+                <!-- Backend -->
+                <div class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl p-6 border border-green-500/30">
+                    <h3 class="text-xl font-bold text-green-400 mb-4">⚙️ Backend</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li>FastAPI (Python)</li>
+                        <li>SQLAlchemy</li>
+                        <li>Pydantic</li>
+                        <li>Celery</li>
+                        <li>PostgreSQL + Redis</li>
+                    </ul>
+                </div>
+
+                <!-- AI/ML -->
+                <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-6 border border-purple-500/30">
+                    <h3 class="text-xl font-bold text-purple-400 mb-4">🤖 AI/ML</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li>Hugging Face</li>
+                        <li>PyTorch / TensorFlow</li>
+                        <li>Scikit-learn</li>
+                        <li>OpenCV</li>
+                        <li>XGBoost</li>
+                    </ul>
+                </div>
+
+                <!-- DevOps -->
+                <div class="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl p-6 border border-orange-500/30">
+                    <h3 class="text-xl font-bold text-orange-400 mb-4">🚀 DevOps</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li>Docker + K8s</li>
+                        <li>GitHub Actions</li>
+                        <li>Prometheus</li>
+                        <li>Grafana</li>
+                        <li>Sentry</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Diagram -->
+    <section class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Architecture du <span class="gradient-text">Système</span></h2>
+            </div>
+
+            <div class="bg-slate-900 rounded-3xl p-8 border border-slate-700 overflow-x-auto">
+                <div class="min-w-[800px]">
+                    <!-- Client Layer -->
+                    <div class="flex justify-center mb-8">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl px-6 py-3 text-white font-semibold">
+                            🖥️ Frontend (React + TypeScript)
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center mb-4">
+                        <div class="text-slate-500 text-2xl">↓</div>
+                    </div>
+
+                    <!-- API Gateway -->
+                    <div class="flex justify-center mb-8">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl px-6 py-3 text-white font-semibold">
+                            🌐 API Gateway (Nginx + FastAPI)
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mb-4">
+                        <div class="text-slate-500 text-2xl">↓</div>
+                    </div>
+
+                    <!-- Services -->
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="bg-slate-800 rounded-xl p-4 text-center border border-slate-700">
+                            <div class="text-2xl mb-2">🔐</div>
+                            <div class="text-white font-medium">Auth Service</div>
+                            <div class="text-slate-500 text-xs">JWT + OAuth2</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-4 text-center border border-slate-700">
+                            <div class="text-2xl mb-2">💬</div>
+                            <div class="text-white font-medium">Chatbot Service</div>
+                            <div class="text-slate-500 text-xs">NLP + LLM</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-4 text-center border border-slate-700">
+                            <div class="text-2xl mb-2">📊</div>
+                            <div class="text-white font-medium">ML Service</div>
+                            <div class="text-slate-500 text-xs">Predictions</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mb-4">
+                        <div class="text-slate-500 text-2xl">↓</div>
+                    </div>
+
+                    <!-- Data Layer -->
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="bg-blue-900/30 rounded-xl p-4 text-center border border-blue-500/30">
+                            <div class="text-2xl mb-2">🐘</div>
+                            <div class="text-blue-400 font-medium">PostgreSQL</div>
+                            <div class="text-slate-500 text-xs">Données relationnelles</div>
+                        </div>
+                        <div class="bg-green-900/30 rounded-xl p-4 text-center border border-green-500/30">
+                            <div class="text-2xl mb-2">🍃</div>
+                            <div class="text-green-400 font-medium">MongoDB</div>
+                            <div class="text-slate-500 text-xs">Données non-structurées</div>
+                        </div>
+                        <div class="bg-red-900/30 rounded-xl p-4 text-center border border-red-500/30">
+                            <div class="text-2xl mb-2">🟥</div>
+                            <div class="text-red-400 font-medium">Redis</div>
+                            <div class="text-slate-500 text-xs">Cache + Sessions</div>
+                        </div>
+                        <div class="bg-purple-900/30 rounded-xl p-4 text-center border border-purple-500/30">
+                            <div class="text-2xl mb-2">🗂️</div>
+                            <div class="text-purple-400 font-medium">S3/MinIO</div>
+                            <div class="text-slate-500 text-xs">Stockage fichiers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Tarifs <span class="gradient-text">Simples</span></h2>
+                <p class="text-xl text-slate-400">100% gratuit pour toujours</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-br from-purple-600 to-blue-600 rounded-3xl p-8 text-center border border-purple-500/50 neon-glow">
+                    <div class="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-white text-sm mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                        Plan Gratuit
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-4">Tout Illimité</h3>
+                    <div class="text-5xl font-bold text-white mb-6">
+                        0€ <span class="text-xl text-white/60">/ pour toujours</span>
+                    </div>
+                    <ul class="space-y-4 text-left max-w-md mx-auto mb-8">
+                        <li class="flex items-center text-white">
+                            <span class="text-green-400 mr-3 text-xl">✓</span>
+                            Accès à tous les modules IA
+                        </li>
+                        <li class="flex items-center text-white">
+                            <span class="text-green-400 mr-3 text-xl">✓</span>
+                            Modèles pré-entraînés inclus
+                        </li>
+                        <li class="flex items-center text-white">
+                            <span class="text-green-400 mr-3 text-xl">✓</span>
+                            Base de données PostgreSQL
+                        </li>
+                        <li class="flex items-center text-white">
+                            <span class="text-green-400 mr-3 text-xl">✓</span>
+                            Code source ouvert (MIT)
+                        </li>
+                        <li class="flex items-center text-white">
+                            <span class="text-green-400 mr-3 text-xl">✓</span>
+                            Support communautaire
+                        </li>
+                        <li class="flex items-center text-white">
+                            <span class="text-green-400 mr-3 text-xl">✓</span>
+                            Déploiement Docker inclus
+                        </li>
+                    </ul>
+                    <button onclick="showModal('register')" class="bg-white text-purple-600 px-8 py-4 rounded-xl font-bold hover:bg-slate-100 transition shadow-lg">
+                        🚀 Commencer Gratuitement
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Prêt à créer votre application IA ?</h2>
+            <p class="text-xl text-slate-200 mb-8">
+                Rejoignez des milliers de développeurs qui utilisent déjà notre plateforme
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="showModal('register')" class="bg-white text-slate-900 px-8 py-4 rounded-xl font-bold hover:bg-slate-100 transition shadow-lg">
+                    ⚡ Commencer Maintenant
+                </button>
+                <a href="https://github.com" target="_blank" class="glass text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition">
+                    📦 Voir sur GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="text-2xl">🤖</span>
+                        <span class="text-xl font-bold gradient-text">AI Platform</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">
+                        Plateforme IA complète et open-source pour créer des applications intelligentes.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Produit</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#features" class="hover:text-white transition">Fonctionnalités</a></li>
+                        <li><a href="#modules" class="hover:text-white transition">Modules</a></li>
+                        <li><a href="#pricing" class="hover:text-white transition">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Ressources</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition">API Reference</a></li>
+                        <li><a href="#" class="hover:text-white transition">Tutoriels</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Communauté</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">GitHub</a></li>
+                        <li><a href="#" class="hover:text-white transition">Discord</a></li>
+                        <li><a href="#" class="hover:text-white transition">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm">© 2024 AI Platform. Tous droits réservés. MIT License.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-slate-400 hover:text-white transition">Confidentialité</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition">Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="hideModal('login')"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
+            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">Connexion</h2>
+                <form onsubmit="event.preventDefault(); alert('Fonctionnalité en développement');">
+                    <div class="mb-4">
+                        <label class="block text-slate-300 text-sm mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="votre@email.com">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-slate-300 text-sm mb-2">Mot de passe</label>
+                        <input type="password" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition">
+                        Se connecter
+                    </button>
+                </form>
+                <p class="text-center text-slate-400 mt-4">
+                    Pas de compte ? <a href="#" onclick="hideModal('login'); showModal('register');" class="text-blue-400 hover:underline">S'inscrire</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="hideModal('register')"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
+            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">Créer un compte</h2>
+                <form onsubmit="event.preventDefault(); alert('Fonctionnalité en développement');">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-slate-300 text-sm mb-2">Prénom</label>
+                            <input type="text" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Jean">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm mb-2">Nom</label>
+                            <input type="text" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Dupont">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-slate-300 text-sm mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="votre@email.com">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-slate-300 text-sm mb-2">Mot de passe</label>
+                        <input type="password" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition">
+                        Créer mon compte
+                    </button>
+                </form>
+                <p class="text-center text-slate-400 mt-4">
+                    Déjà un compte ? <a href="#" onclick="hideModal('register'); showModal('login');" class="text-blue-400 hover:underline">Se connecter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showModal(type) {
+            document.getElementById(type + 'Modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideModal(type) {
+            document.getElementById(type + 'Modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideModal('login');
+                hideModal('register');
+            }
+        });
+    </script>
+</body>
+</html>
